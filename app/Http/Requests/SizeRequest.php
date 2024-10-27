@@ -9,8 +9,8 @@ class SizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'width' => ['required', 'integer'],
-            'height' => ['required', 'integer'],
+            'width' => ['required', 'integer', 'min:1', 'max:10000'],
+            'height' => ['required', 'integer', 'min:1', 'max:10000'],
         ];
     }
 
