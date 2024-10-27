@@ -18,6 +18,10 @@
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
                         {{ __('Категорії') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.sizes.index')" :active="request()->routeIs('admin.sizes.index')">
+                        {{ __('Розміри') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 

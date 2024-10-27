@@ -27,11 +27,6 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('category', 'created');
     }
 
-    public function show(Category $category)
-    {
-        return redirect()->route('admin.categories.edit');
-    }
-
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));
@@ -59,9 +54,9 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('category', 'restored');
     }
 
-    public function destroy(Category $catetory)
+    public function destroy(Category $category)
     {
-        $catetory->forceDelete();
+        $category->forceDelete();
 
         return redirect()->route('admin.categories.index')->with('category', 'destroyed');
     }

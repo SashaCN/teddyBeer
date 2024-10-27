@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,14 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/categories/destroy', 'destroy')->name('categories.destroyAll');
     });
     Route::resource('categories', CategoryController::class);
+
+    // Sizes
+    Route::controller(SizeController::class)->group(function () {
+        Route::delete('/sizes/{size}/delete', 'delete')->name('sizes.delete');
+        Route::patch('/sizes/{id}/restore', 'restore')->name('sizes.restore');
+        Route::delete('/sizes/destroy', 'destroy')->name('sizes.destroyAll');
+    });
+    Route::resource('sizes', SizeController::class);
 });
 
 require __DIR__.'/auth.php';
