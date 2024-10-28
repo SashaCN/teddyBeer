@@ -21,7 +21,9 @@
                     <x-nav-link :href="route('admin.sizes.index')" :active="request()->routeIs('admin.sizes.index')">
                         {{ __('Розміри') }}
                     </x-nav-link>
-
+                    <x-nav-link :href="route('admin.goods.index')" :active="request()->routeIs('admin.goods.index')">
+                        {{ __('Товари') }}
+                    </x-nav-link>
                 </div>
             </div>
 

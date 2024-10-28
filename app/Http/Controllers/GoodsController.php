@@ -6,12 +6,13 @@ use App\Http\Requests\GoodsRequest;
 use App\Models\Category;
 use App\Models\Goods;
 use App\Models\Size;
+use Illuminate\Support\Facades\Storage;
 
 class GoodsController extends Controller
 {
     public function index()
     {
-        $goods = Goods::withTrashed()->with('category', 'sizes')->get();
+        $goods = Goods::withTrashed()->with('category', 'sizes')->orderBy('updated_at', 'desc')->paginate(25);
 
         return view('admin.goods.index', compact('goods'));
     }
@@ -26,7 +27,20 @@ class GoodsController extends Controller
 
     public function store(GoodsRequest $request)
     {
-        Goods::create($request->validated());
+        $data = $request->validated();
+
+        if (!isset($data['availability'])) {
+            $data['availability'] = false;
+        }
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('goods', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $goods = Goods::create($request->validated());
+
+        $goods->sizes()->sync($data['sizes']);
 
         return redirect()->route('admin.goods.index')->with('goods', 'created');
     }
@@ -41,7 +55,24 @@ class GoodsController extends Controller
 
     public function update(GoodsRequest $request, Goods $goods)
     {
-        $goods->update($request->validated());
+        $data = $request->validated();
+
+        if (!isset($data['availability'])) {
+            $data['availability'] = false;
+        }
+
+        if ($request->hasFile('image')) {
+            if ($goods->image && $goods->image != 'goods/teddy_logo.png') {
+                Storage::disk('public')->delete($goods->image);
+            }
+
+            $imagePath = $request->file('image')->store('goods', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        $goods->update($data);
+
+        $goods->sizes()->sync($data['sizes']);
 
         return redirect()->route('admin.goods.index')->with('goods', 'updated');
     }

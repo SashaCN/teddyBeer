@@ -21,7 +21,7 @@ class GoodsFactory extends Factory
             'title' => $this->faker->word(),
             'description' => $this->faker->text(),
             'availability' => $this->faker->boolean(),
-            'color' => $this->faker->word(),
+            'color' => $this->faker->colorName(),
         ];
     }
 

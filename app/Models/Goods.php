@@ -14,6 +14,7 @@ class Goods extends Model
 
     protected $fillable = [
         'category_id',
+        'image',
         'title',
         'description',
         'availability',

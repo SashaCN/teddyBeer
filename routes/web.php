@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\GoodsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,7 @@ Route::get('/', function () {
 
 // Admin panel
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -38,6 +39,16 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::delete('/sizes/destroy', 'destroy')->name('sizes.destroyAll');
     });
     Route::resource('sizes', SizeController::class);
+
+    // Goods
+    Route::controller(GoodsController::class)->group(function () {
+        Route::delete('/goods/{goods}/delete', 'delete')->name('goods.delete');
+        Route::patch('/goods/{id}/restore', 'restore')->name('goods.restore');
+        Route::delete('/goods/destroy', 'destroy')->name('goods.destroyAll');
+    });
+    Route::resource('goods', GoodsController::class)->parameters([
+        'goods' => 'goods',
+    ]);
 });
 
 require __DIR__.'/auth.php';

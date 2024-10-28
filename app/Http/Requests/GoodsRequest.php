@@ -10,10 +10,14 @@ class GoodsRequest extends FormRequest
     {
         return [
             'category_id' => ['required', 'integer', 'exists:categories,id'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'title' => ['required', 'string', 'max:191'],
             'description' => ['nullable', 'string', 'max:1000'],
             'availability' => ['boolean'],
             'color' => ['required', 'string', 'max:191'],
+
+            'sizes' => ['nullable', 'array'],
+            'sizes.*' => ['required', 'integer', 'exists:sizes,id'],
         ];
     }
 
