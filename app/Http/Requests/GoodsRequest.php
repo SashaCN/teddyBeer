@@ -15,6 +15,7 @@ class GoodsRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:1000'],
             'availability' => ['boolean'],
             'color' => ['required', 'string', 'max:191'],
+            'price' => ['required', 'integer', 'min:1', 'max:100000'],
 
             'sizes' => ['nullable', 'array'],
             'sizes.*' => ['required', 'integer', 'exists:sizes,id'],
