@@ -90,6 +90,17 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label for="price" class="block text-md font-medium leading-6 text-gray-200">Ціна</label>
+                        <div class="mt-2">
+                            <input id="price" name="price" type="number" value="{{ old('price') }}"
+                                   class="bg-gray-600 block w-full p-2 text-md border-0 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-600 sm:text-sm sm:leading-6">
+                            @error('price')
+                            <span class="error text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="flex items-center">
                         <input id="availability" name="availability" type="checkbox" value="1"
                                {{ old('availability') ? 'checked' : '' }}
