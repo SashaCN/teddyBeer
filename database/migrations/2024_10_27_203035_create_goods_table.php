@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->boolean('availability')->default(true);
             $table->string('color');
+            $table->integer('price');
             $table->softDeletes();
             $table->timestamps();
         });

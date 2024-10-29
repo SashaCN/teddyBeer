@@ -19,6 +19,7 @@ class Goods extends Model
         'description',
         'availability',
         'color',
+        'price'
     ];
 
     public function Category (): BelongsTo

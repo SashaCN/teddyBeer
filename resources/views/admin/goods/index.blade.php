@@ -40,6 +40,7 @@
                                 <th>Наявність</th>
                                 <th>Колір</th>
                                 <th>Розмір</th>
+                                <th>Ціна</th>
                                 <th colspan="2">Дії</th>
                             </tr>
                             </thead>
@@ -64,6 +65,7 @@
                                             -
                                         @endforelse
                                     </td>
+                                    <td>{{ $item->price }}</td>
                                     @if(is_null($item->deleted_at))
                                         <td class="p-2">
                                             <a class="flex justify-center"

@@ -22,6 +22,7 @@ class GoodsFactory extends Factory
             'description' => $this->faker->text(),
             'availability' => $this->faker->boolean(),
             'color' => $this->faker->colorName(),
+            'price' => $this->faker->numberBetween(500, 1500),
         ];
     }
 
